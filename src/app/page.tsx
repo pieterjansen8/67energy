@@ -87,7 +87,14 @@ export default function Hero({
 
 function HeroContent(props: HeroProps) {
   const searchParams = useSearchParams();
-  let { title, description, mockup, badge, buttons, className } = props;
+  let {
+    title,
+    description,
+    mockup,
+    badge,
+    buttons = [],
+    className,
+  } = props;
   const search = searchParams.get('locale');
   if (search === "MA") {
     description = "في 67 لحلول الطاقة، نركز على تقديم حلول طاقة شاملة لمشروعك. استأجر وحدات فولتكس الخاصة بنا بسهولة لتطبيقات متنوعة، سواء كان ذلك لتوفير الطاقة في موقع بناء أو لتقديم حل طاقة مؤقت لفعالية. نحن نقدم الدعم الذي تحتاجه لجعل مشروعك ناجحًا.";
@@ -167,5 +174,4 @@ function HeroContent(props: HeroProps) {
       </div>
     </Section>
   );
-}
 }
