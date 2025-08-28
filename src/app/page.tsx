@@ -1,17 +1,18 @@
+"use client";
 import { ArrowRightIcon } from "lucide-react";
 import { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
+import { useSearchParams } from 'next/navigation'
 import Github from "@/components/logos/github";
 import { Badge } from "@/components/ui/badge";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import Glow from "@/components/ui/glow";
 import { Mockup, MockupFrame } from "@/components/ui/mockup";
-import Image from "next/image";
+
 import { Section } from "@/components/ui/section";
 import Screenshot  from "@/components/ui/screenshot";
-import Navbar from "@/components/navbar";
 interface HeroButtonProps {
   href: string;
   text: string;
@@ -31,7 +32,7 @@ interface HeroProps {
 
 export default function Hero({
   title = "67 energy solutions ",
-  description = "At 67 energy solutions, our focus is on providing energy solutions for your project. Easily rent our Voltix units for a wide range of applications, whether it’s supplying power to a construction site or providing a temporary energy solution for an event. We offer the support you need to make your project a success.",
+  description = "Bij 67 Energy Solutions richten wij ons op het leveren van energietotaaloplossingen voor jouw project. Huur eenvoudig onze Voltix-units voor uiteenlopende toepassingen, of het nu gaat om het voorzien van stroom op een bouwplaats of het bieden van een tijdelijke energieoplossing voor een evenement. Wij bieden de ondersteuning die je nodig hebt om van jouw project een succes te maken.",
   mockup = (
     <Screenshot
       srcLight="/hero.jpg"
@@ -45,7 +46,7 @@ export default function Hero({
   badge = (
     <Badge variant="outline" className="animate-appear">
       <span className="text-muted-foreground">
-        Were are the greenest mobile energy provider in Marroco!
+        We zijn de schoonste energieoplossing van Nederland!
       </span>
       <a href={"#"} className="flex items-center gap-1">
         Get started
@@ -69,6 +70,30 @@ export default function Hero({
   ],
   className,
 }: HeroProps) {
+  const searchParams = useSearchParams()
+  const search = searchParams.get('locale')
+  if(search=="MA"){ 
+    description = "في 67 لحلول الطاقة، نركز على تقديم حلول طاقة شاملة لمشروعك. استأجر وحدات فولتكس الخاصة بنا بسهولة لتطبيقات متنوعة، سواء كان ذلك لتوفير الطاقة في موقع بناء أو لتقديم حل طاقة مؤقت لفعالية. نحن نقدم الدعم الذي تحتاجه لجعل مشروعك ناجحًا."
+    buttons = [
+      {
+        href: "#",
+        text: "ابدأ الآن",
+        variant: "default",
+      },
+    ]
+      badge = (
+    <Badge variant="outline" className="animate-appear">
+      <span className="text-muted-foreground">
+        نحن أنظف حل للطاقة في هولندا!
+      </span>
+      <a href={"#"} className="flex items-center gap-1">
+        Get started
+        <ArrowRightIcon className="size-3" />
+      </a>
+    </Badge>
+  )
+  
+  }
   return (
 
     <Section
