@@ -64,6 +64,7 @@ export default function Hero({
       text: "Github",
       variant: "glow",
       icon: <Github className="mr-2 size-4" />,
+  
     },
   ],
   className,
@@ -95,7 +96,7 @@ export default function Hero({
                   size="lg"
                   asChild
                 >
-                  <a href={button.href}>
+                  <a href={button.href} target="_blank">
                     {button.icon}
                     {button.text}
                     {button.iconRight}
