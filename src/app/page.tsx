@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react';
 import Github from "@/components/logos/github";
 import { Badge } from "@/components/ui/badge";
 import { Button, type ButtonProps } from "@/components/ui/button";
@@ -70,39 +71,52 @@ export default function Hero({
   ],
   className,
 }: HeroProps) {
-  const searchParams = useSearchParams()
-  const search = searchParams.get('locale')
-  if(search=="MA"){ 
-    description = "في 67 لحلول الطاقة، نركز على تقديم حلول طاقة شاملة لمشروعك. استأجر وحدات فولتكس الخاصة بنا بسهولة لتطبيقات متنوعة، سواء كان ذلك لتوفير الطاقة في موقع بناء أو لتقديم حل طاقة مؤقت لفعالية. نحن نقدم الدعم الذي تحتاجه لجعل مشروعك ناجحًا."
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HeroContent
+        title={title}
+        description={description}
+        mockup={mockup}
+        badge={badge}
+        buttons={buttons}
+        className={className}
+      />
+    </Suspense>
+  );
+}
+
+function HeroContent(props: HeroProps) {
+  const searchParams = useSearchParams();
+  let { title, description, mockup, badge, buttons, className } = props;
+  const search = searchParams.get('locale');
+  if (search === "MA") {
+    description = "في 67 لحلول الطاقة، نركز على تقديم حلول طاقة شاملة لمشروعك. استأجر وحدات فولتكس الخاصة بنا بسهولة لتطبيقات متنوعة، سواء كان ذلك لتوفير الطاقة في موقع بناء أو لتقديم حل طاقة مؤقت لفعالية. نحن نقدم الدعم الذي تحتاجه لجعل مشروعك ناجحًا.";
     buttons = [
       {
         href: "#",
         text: "ابدأ الآن",
         variant: "default",
       },
-    ]
-      badge = (
-    <Badge variant="outline" className="animate-appear">
-      <span className="text-muted-foreground">
-        نحن أنظف حل للطاقة في هولندا!
-      </span>
-      <a href={"#"} className="flex items-center gap-1">
-        Get started
-        <ArrowRightIcon className="size-3" />
-      </a>
-    </Badge>
-  )
-  
+    ];
+    badge = (
+      <Badge variant="outline" className="animate-appear">
+        <span className="text-muted-foreground">
+          نحن أنظف حل للطاقة في هولندا!
+        </span>
+        <a href={"#"} className="flex items-center gap-1">
+          Get started
+          <ArrowRightIcon className="size-3" />
+        </a>
+      </Badge>
+    );
   }
   return (
-
     <Section
       className={cn(
         "fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0",
         className,
       )}
     >
-      
       <div className="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
           {badge !== false && badge}
@@ -153,4 +167,5 @@ export default function Hero({
       </div>
     </Section>
   );
+}
 }
