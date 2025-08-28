@@ -60,7 +60,7 @@ export default function Hero({
       variant: "default",
     },
     {
-      href: "https://github.com/pieterjansen8@67energy",
+      href: "https://github.com/pieterjansen8/67energy",
       text: "Github",
       variant: "glow",
       icon: <Github className="mr-2 size-4" />,
